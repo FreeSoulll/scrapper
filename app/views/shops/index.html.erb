@@ -1,0 +1,15 @@
+<h1>Shops</h1>
+
+<% @shops.each do |shop| %>
+  <h2><%= link_to shop.shop_title, shop %></h2>
+  <% if can? :update, shop %>
+    <%= link_to "Edit", edit_shop_path(shop) %> |
+  <% end %>
+  <% if can? :destroy, shop %>
+    <%= link_to "Destroy", shop, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>
+
+<% if can? :create, Shop %>
+  <%= link_to "New Article", new_shop_path %>
+<% end %>

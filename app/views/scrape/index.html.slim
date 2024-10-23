@@ -1,0 +1,153 @@
+h2.mb-5.text-center= 'Парсинг товаров и статей для импорта в Insales'
+
+.container
+  .products.d-flex.align-items-center.flex-column.gap-5
+    h2= 'Парсинг товаров'
+    = form_with url: products_path, method: :post, class: 'd-flex flex-column gap-2 col-6', local: true do |f|
+      .form-group
+        = f.label 'Указываем главную страницу каталога.', class: 'form-label'
+        = f.text_field :main_page, class: 'form-control'
+        .form-text= 'Как пример - https://pirosmani.info/mens-all'
+
+      .form-group
+        = f.label 'Название категории', class: 'form-label'
+        = f.text_area :category_header, class: 'form-control'
+      
+  
+      .form-group
+        = f.label 'Указываем класс товара', class: 'form-label'
+        = f.text_area :product_css, class: 'form-control'
+      
+
+      .form-group
+        = f.label 'Указываем класс линка товара', class: 'form-label'
+        = f.text_area :product_link_css, class: 'form-control'
+
+      .form-group
+        = f.label 'Список основных категорий', class: 'form-label'
+        = f.text_area :categories_list, class: 'form-control'
+        .form-text= 'Укажите линки всех главных категорий через запятую'
+
+      .form-group
+        = f.label 'Линк подкатегорий', class: 'form-label'
+        = f.text_area :subcategory_link, class: 'form-control'
+        .form-text= 'Укажите класс подкатегории категории'
+
+      .form-check
+        = f.label 'Динамическая подгрузка товаров?', class: 'form-label', for: 'pagination'
+        = f.check_box :dynamic_pagination, class: 'form-check-input', id: 'pagination'
+
+      .form-check
+        = f.label 'Нужна ли пагинация?', class: 'form-label', for: 'pagination'
+        = f.check_box :pagination, class: 'form-check-input', id: 'pagination'
+
+      .form-group
+        = f.label 'Элемент пагинации', class: 'form-label'
+        = f.text_area :pagination_item, class: 'form-control'
+
+
+      .mt-5
+        h4= 'Карточка товара'
+        p= 'Во всех полях указываем класс элемента(ов). Как пример - .js-store-prod-name'
+
+      .form-group
+        = f.label 'Категория товара', class: 'form-label'
+        = f.text_field :product_category, class: 'form-control'
+
+      .form-group
+        = f.label 'Название товара', class: 'form-label'
+        = f.text_field :product_name, class: 'form-control'
+      
+      .form-group
+        = f.label 'Цена товара', class: 'form-label'
+        = f.text_field :product_price, class: 'form-control'
+      
+      .form-group
+        = f.label 'Нужно ли распарсить цену из названия варианта?(Если надо то прописываем знак раделения)', class: 'form-label'
+        = f.text_field :product_price_from_variant, class: 'form-control'
+      
+      .form-group
+        = f.label 'Старая цена товара', class: 'form-label'
+        = f.text_field :old_price, class: 'form-control'
+
+      .form-group
+        = f.label 'Артикул', class: 'form-label'
+        = f.text_field :product_sku, class: 'form-control'
+
+      .form-group
+        = f.label 'Краткое описание', class: 'form-label'
+        = f.text_field :product_short_description, class: 'form-control'
+
+      .form-group
+        = f.label 'Описание', class: 'form-label'
+        = f.text_field :product_description, class: 'form-control' 
+
+      .form-group
+        = f.label 'Изображения', class: 'form-label'
+        = f.text_field :product_images, class: 'form-control' 
+
+      .form-group
+        = f.label 'Из какого аттрбута берем линк на изображение(указываем href или src)', class: 'form-label'
+        = f.text_field :product_images_type, class: 'form-control' 
+
+      <legend>Раздел с параметрами</legend>
+      <hr class="hr" />
+
+      .form-group
+        = f.label 'Раздел с параметрами(контейнер)', class: 'form-label'
+        = f.text_field :properties_block, class: 'form-control' 
+      
+      .form-group
+        = f.label 'Параметр', class: 'form-label'
+        = f.text_field :property, class: 'form-control' 
+
+      .form-group
+        = f.label 'Название параметра', class: 'form-label'
+        = f.text_field :prop_title, class: 'form-control' 
+      
+      .form-group
+        = f.label 'Значение параметра', class: 'form-label'
+        = f.text_field :prop_value, class: 'form-control' 
+
+      <legend>Раздел с опциями</legend>
+      <hr class="hr" />
+
+      .form-group
+        = f.label 'Контейнер варианта', class: 'form-label'
+        = f.text_field :options_container, class: 'form-control' 
+
+      .form-group
+        = f.label 'Название варианта', class: 'form-label'
+        = f.text_field :options_title, class: 'form-control' 
+      
+      .form-group
+        = f.label 'Значения  варианта', class: 'form-label'
+        = f.text_field :options_value, class: 'form-control'
+
+      <legend>Раздел с дополнительными полями</legend>
+      <hr class="hr" />
+
+      .form-group
+        = f.label 'Контейнер с доп.полями', class: 'form-label'
+        = f.text_field :fields_container, class: 'form-control' 
+
+      .form-group
+        = f.label 'Одиночное доп.поле', class: 'form-label'
+        = f.text_field :single_field, class: 'form-control' 
+      
+      .form-group
+        = f.label 'Название доп.поля', class: 'form-label'
+        = f.text_field :field_title, class: 'form-control' 
+      
+      .form-group
+        = f.label 'Значение доп.поля', class: 'form-label'
+        = f.text_field :field_value, class: 'form-control' 
+
+      = f.submit 'Ask', class: 'btn btn-primary'
+
+    h2= 'Парсинг Категорий'
+    = form_with url: categories_path, method: :post, class: 'd-flex flex-column gap-2 col-6', local: true do |f|
+      .form-group
+        = f.label 'Указываем класс товара', class: 'form-label'
+        = f.text_area :test_css, class: 'form-control'
+      = f.submit 'Collect categories', class: 'btn btn-primary'

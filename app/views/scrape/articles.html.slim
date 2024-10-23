@@ -1,0 +1,47 @@
+.container
+  .articles.d-flex.align-items-center.flex-column.gap-5
+    h2= 'Парсинг статей'
+    = form_with url: upload_articles_path, method: :post, class: 'd-flex flex-column gap-2 col-6', local: true do |f|
+      .form-group
+        = f.label 'Указываем главную страницу блога, откуда будем забирать информацию', class: 'form-label'
+        = f.text_field :main_page, class: 'form-control'
+        .form-text= 'Как пример - https://botanicafood.ru/blog'
+
+      .form-group
+        = f.label 'Указываем адрес блога куда будем импортировать', class: 'form-label'
+        = f.text_area :articles_url, class: 'form-control'
+        .form-text= 'Указываем в таком виде - https://myshop-cls41.myinsales.ru/admin/blogs/5833585/articles.json'
+
+      .form-check
+        = f.label 'Есть пагинация?', class: 'form-label', for: 'pagination'
+        = f.check_box :pagination, class: 'form-check-input', id: 'pagination'
+
+      .form-group
+        = f.label 'Пагинация', class: 'form-label'
+        = f.text_field :paginate_css, class: 'form-control' 
+      
+      .form-group
+        = f.label 'Максимальное количесвто страниц в блоге', class: 'form-label'
+        = f.text_field :count_pages, class: 'form-control' 
+
+      .mt-5
+        h4= 'Статья'
+        p= 'Во всех полях указываем класс элемента(ов). Как пример - .js-store-prod-name'
+
+      .form-group
+        = f.label 'Класс статьи', class: 'form-label'
+        = f.text_field :articles_css, class: 'form-control'
+      
+      .form-group
+        = f.label 'Заголовок статьи', class: 'form-label'
+        = f.text_field :header_css, class: 'form-control'
+      
+      .form-group
+        = f.label 'Главная картинка статьи', class: 'form-label'
+        = f.text_field :main_image_css, class: 'form-control'
+
+      .form-group
+        = f.label 'Контент статьи', class: 'form-label'
+        = f.text_field :content_css, class: 'form-control'
+
+      = f.submit 'Начать парсинг', class: 'btn btn-primary'

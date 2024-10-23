@@ -1,0 +1,15 @@
+= form_with model: @shop, class: 'new-answer col-6', local: true do |f|
+  .form-group
+    = f.label 'Название магазина', class: 'form-label'
+    = f.text_field :shop_title, class: 'form-control'
+
+  .form-group
+    = f.label "API токен", class: 'form-label'
+    = f.text_field :api_token_shop, class: 'form-control'
+
+  .form-group
+    = f.label "API пароль", class: 'form-label'
+    = f.text_field :api_token_password, class: 'form-control'
+
+  .form-group
+    = f.submit 'Добавить магазин', class: 'btn btn-primary'
