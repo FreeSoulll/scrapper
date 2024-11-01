@@ -120,17 +120,15 @@ class ScrapeController < ApplicationController
     @driver = new_connection.set_dirver
     page(@main_page)
 
-    @list_categories = scrape_categories(@driver)
+    #@list_categories = scrape_categories(@driver)
 
     # #main .pathway
     test_categories = {
-      "Главная → Автосвет, электрика и звук → Антенны и переходники": "https://granves-shop.ru/shop/osveschenie-i-yelektrika/antenny-i-perehodniki",
-      "Главная → Шумоизоляция": "https://granves-shop.ru/shop/shumoizoljacija",
-      "Главная → Автосвет, электрика и звук → Динамики и пищалки, проставки": "https://granves-shop.ru/shop/osveschenie-i-yelektrika/dinamiki-i-pischalki-prostavki"
+      "Главная → Шумоизоляция": "https://granves-shop.ru/shop/shumoizoljacija"
     }
 
     # собираем товары new
-    @list_categories.each do |key, value|
+    test_categories.each do |key, value|
       unless value.is_a?(Hash)
         @driver.navigate.to(value)
 
@@ -171,6 +169,11 @@ class ScrapeController < ApplicationController
     #respond_to do |format|
      # format.json { render json: @products_url }
     #end
+  end
+
+  def change_linlk_in_file
+    @new_service = ChangeUrlService.new(@driver, FTP_DATA)
+    @new_service.change_urls
   end
 
   def upload_articles

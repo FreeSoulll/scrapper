@@ -14,6 +14,12 @@ class ScrapProductInfoService
         selector.present? && @driver.find_elements(:css, selector).any?
       end
 
+      # метод ожидания появления текста в элементе
+      def wait_for_content(selector, timeout: 10)
+        wait = Selenium::WebDriver::Wait.new(timeout: timeout)
+        wait.until { element_present?(selector) && !@driver.find_element(:css, selector).text.empty? }
+      end
+
       # собираем название
       if element_present?(@product_setting[:product_name])
         name = @driver.find_element(:css, @product_setting[:product_name].to_s).text
@@ -48,6 +54,30 @@ class ScrapProductInfoService
 
         puts("Артикул - #{sku}")
         product_info['Артикул'] = sku.gsub(';',',')
+      end
+
+      # собираем seo description
+       if element_present?(@product_setting[:field_meta_description])
+        description = @driver.find_element(:css, @product_setting[:field_meta_description]).attribute('content')
+
+        puts("Сео описание - #{description}")
+        product_info['SEO описание'] = description
+      end
+
+      # собираем seo keyword
+      if element_present?(@product_setting[:field_meta_keyword])
+        keyword = @driver.find_element(:css, @product_setting[:field_meta_keyword]).attribute('content')
+
+        puts("Сео keyword - #{keyword}")
+        product_info['SEO keyword'] = keyword
+      end
+
+      # собираем seo title
+      if element_present?(@product_setting[:field_meta_title])
+        title = @driver.title
+
+        puts("Сео title - #{title}")
+        product_info['SEO title'] = title
       end
 
       # собираем старый урл

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "articles", to: 'scrape#articles'
   get "reviews", to: 'scrape#reviews'
   post "categories", to: 'scrape#collect_categories'
+  post "change_linlk_in_file", to: 'scrape#change_linlk_in_file'
 
   resources :shops
 

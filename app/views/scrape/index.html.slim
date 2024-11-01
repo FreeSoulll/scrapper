@@ -142,6 +142,21 @@ h2.mb-5.text-center= 'Парсинг товаров и статей для им�
       .form-group
         = f.label 'Значение доп.поля', class: 'form-label'
         = f.text_field :field_value, class: 'form-control' 
+      
+      <legend>Раздел SEO</legend>
+      <hr class="hr" />
+
+      .form-group
+        = f.label 'meta description', class: 'form-label'
+        = f.text_field :field_meta_description, class: 'form-control' 
+      
+      .form-group
+        = f.label 'meta keyword', class: 'form-label'
+        = f.text_field :field_meta_keyword, class: 'form-control' 
+      
+      .form-group
+        = f.label 'meta title', class: 'form-label'
+        = f.text_field :field_meta_title, class: 'form-control' 
 
       = f.submit 'Ask', class: 'btn btn-primary'
 
@@ -150,4 +165,8 @@ h2.mb-5.text-center= 'Парсинг товаров и статей для им�
       .form-group
         = f.label 'Указываем класс товара', class: 'form-label'
         = f.text_area :test_css, class: 'form-control'
+      = f.submit 'Collect categories', class: 'btn btn-primary'
+
+    h2= 'Замена в файле линков с хостинга'
+    = form_with url: change_linlk_in_file_path, method: :post, class: 'd-flex flex-column gap-2 col-6', local: true do |f|
       = f.submit 'Collect categories', class: 'btn btn-primary'
